@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#pragma warning(disable:4996)
+
 #define WIDTH (352)
 #define HEIGHT (288)
 

@@ -20,7 +20,23 @@ void main() {
 	img_prev = MemAlloc_2D(WIDTH, HEIGHT * 3);
 
 	while (read_size = Read_Frame(fp_in, img_in, WIDTH, HEIGHT * 3)) {
+		Cpy_Frame(img_in, img_out, WIDTH, HEIGHT * 3);
+		Write_Frame(fp_cpy_out, img_out, WIDTH, HEIGHT * 3);
 
+		Average_RGB(img_in, img_out, WIDTH, HEIGHT);
+		Write_Frame(fp_avr_out, img_out, WIDTH, HEIGHT * 3);
+		
+		
+		if (first_frame != 1) {
+			Sub_Frame(img_in, img_prev, img_out, WIDTH, HEIGHT * 3);
+		}
+
+		Cpy_Frame(img_in, img_prev, WIDTH, HEIGHT * 3);
+
+		if (first_frame != 1) { 
+			Write_Frame(fp_sub_out, img_out, WIDTH, HEIGHT * 3); 
+		}
+		first_frame++;
 	}
 
 	MemFree_2D(img_in, HEIGHT * 3);
